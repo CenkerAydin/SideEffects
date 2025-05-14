@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.cenkeraydin.sideeffects"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.cenkeraydin.sideeffects"

@@ -18,16 +18,14 @@ import kotlinx.coroutines.delay
 @Composable
 fun LaunchedEffectExample(modifier: Modifier = Modifier) {
     var count by remember { mutableStateOf(0) }
-    var startCounting by remember { mutableStateOf(false) }
+    var resetKey by remember { mutableStateOf(0) } // Her sıfırlamada değişen anahtar
 
-    // LaunchedEffect: startCounting değiştiğinde çalışır
-    LaunchedEffect(startCounting) {
-        if (startCounting) {
-            while (count < 10) {
-                delay(1000L)
-                count++
-            }
-            startCounting = false // Sayım bittiğinde durdur
+    // LaunchedEffect: resetKey değiştiğinde yeniden başlar
+    LaunchedEffect(resetKey) {
+        count = 0 // Sayaç sıfırlanır
+        while (count < 10) {
+            delay(1000L)
+            count++
         }
     }
 
@@ -37,8 +35,8 @@ fun LaunchedEffectExample(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Sayaç: $count")
-        Button(onClick = { startCounting = true }) {
-            Text("Sayacı Başlat")
+        Button(onClick = { resetKey++ }) { // Her tıklamada resetKey artar
+            Text("Sayacı Sıfırla ve Tekrardan Başlat")
         }
     }
 }
